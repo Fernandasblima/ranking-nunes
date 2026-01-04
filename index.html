@@ -1,197 +1,243 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nunes: Só não pode parar</title>
-    <style>
-        :root { --primary: #2e7d32; --gold: #ffd700; --silver: #c0c0c0; --bronze: #cd7f32; --bg: #f8f9fa; --danger: #d32f2f; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
-        .app-container { width: 100%; max-width: 450px; }
-        
-        /* Pódio */
-        .podium { display: flex; justify-content: center; align-items: flex-end; gap: 10px; margin: 20px 0; height: 120px; }
-        .podium-place { display: flex; flex-direction: column; align-items: center; flex: 1; border-radius: 8px 8px 0 0; color: white; font-weight: bold; padding: 10px 5px; text-align: center; font-size: 0.8rem; overflow: hidden; }
-        .first { background: var(--gold); height: 100%; color: #333; box-shadow: 0 4px 10px rgba(255,215,0,0.3); }
-        .second { background: var(--silver); height: 80%; color: #333; }
-        .third { background: var(--bronze); height: 60%; }
-
-        /* Ações */
-        .add-box { background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; gap: 8px; }
-        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; }
-        .btn-add { background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-
-        .tabs { display: flex; gap: 10px; margin-bottom: 15px; }
-        .tab { flex: 1; padding: 12px; border: none; border-radius: 8px; cursor: pointer; background: #e0e0e0; font-weight: bold; }
-        .tab.active { background: var(--primary); color: white; }
-
-        .card { background: white; padding: 12px 15px; margin-bottom: 10px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .info { display: flex; flex-direction: column; cursor: pointer; }
-        .name { font-weight: bold; text-decoration: underline dotted #ccc; }
-        
-        .controls { display: flex; align-items: center; gap: 8px; }
-        .btn-round { width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
-        .score { font-size: 1.2rem; font-weight: bold; min-width: 30px; text-align: center; }
-        .btn-del { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1.2rem; padding: 5px; }
-        
-        .footer-btns { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; text-align: center; }
-        .btn-share { background: #25D366; color: white; padding: 15px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1rem; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nunes: Só não pode parar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .app-container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .podium {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+    .podium-place {
+      text-align: center;
+      font-weight: bold;
+    }
+    .first { color: gold; }
+    .second { color: silver; }
+    .third { color: #cd7f32; }
+    .add-box {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .add-box input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .btn-add {
+      margin-left: 10px;
+      padding: 8px 12px;
+      background: #2196f3;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      background: #eee;
+    }
+    .tab.active {
+      background: #2196f3;
+      color: #fff;
+    }
+    .card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+    }
+    .btn-round {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+    .btn-del {
+      background: red;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+    .footer-btns {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .btn-share {
+      background: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-
 <div class="app-container">
-    <h2 style="text-align:center">🏆 Só não pode parar</h2>
-
-    <div id="podio-container" class="podium"></div>
-
-    <div class="add-box">
-        <input type="text" id="novoNome" placeholder="Novo participante...">
-        <button class="btn-add" onclick="adicionar()">Adicionar</button>
-    </div>
-
-    <div class="tabs">
-        <button class="tab active" id="tab-ativos" onclick="filtrar('ativos')">Ativos</button>
-        <button class="tab" id="tab-inativos" onclick="filtrar('inativos')">Inativos</button>
-    </div>
-
-    <div id="lista"></div>
-
-    <div class="footer-btns">
-        <button class="btn-share" onclick="compartilhar()">Enviar Ranking no WhatsApp</button>
-        <button style="background:none; border:none; color:#999; cursor:pointer; font-size: 0.8rem;" onclick="resetar()">Zerar Pontos de Todos</button>
-    </div>
+  <h2 style="text-align:center">🏆 Só não pode parar</h2>
+  <div id="podio-container" class="podium"></div>
+  <div class="add-box">
+    <input type="text" id="novoNome" placeholder="Novo participante...">
+    <button class="btn-add" onclick="adicionar()">Adicionar</button>
+  </div>
+  <div class="tabs">
+    <button class="tab active" id="tab-ativos" onclick="filtrar('ativos')">Ativos</button>
+    <button class="tab" id="tab-inativos" onclick="filtrar('inativos')">Inativos</button>
+  </div>
+  <div id="lista"></div>
+  <div class="footer-btns">
+    <button class="btn-share" onclick="compartilhar()">Enviar Ranking no WhatsApp</button>
+    <button style="background:none; border:none; color:#999; cursor:pointer; font-size: 0.8rem;" onclick="resetar()">Zerar Pontos de Todos</button>
+  </div>
 </div>
 
+<!-- Firebase SDK via CDN -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
 <script>
-    // Lista inicial vinda da sua imagem
-    const listaInicial = [
-        { nome: "Thiago", pontos: 2, status: 'ativos' },
-        { nome: "Maíra", pontos: 2, status: 'ativos' },
-        { nome: "Ivan", pontos: 1, status: 'ativos' },
-        { nome: "Tamiris", pontos: 1, status: 'ativos' },
-        { nome: "João Victor", pontos: 0, status: 'ativos' },
-        { nome: "Marina", pontos: 1, status: 'ativos' },
-        { nome: "Fernanda", pontos: 1, status: 'ativos' },
-        { nome: "Rosalia", pontos: 0, status: 'ativos' },
-        { nome: "Carol", pontos: 0, status: 'ativos' },
-        { nome: "Carlos", pontos: 0, status: 'ativos' },
-        { nome: "Pedro", pontos: 0, status: 'ativos' },
-        { nome: "Elton", pontos: 0, status: 'ativos' },
-        { nome: "Rosilene", pontos: 1, status: 'ativos' },
-        { nome: "Flavinha", pontos: 0, status: 'inativos' },
-        { nome: "Camila", pontos: 0, status: 'inativos' },
-        { nome: "Elismar", pontos: 0, status: 'inativos' },
-        { nome: "Fran", pontos: 0, status: 'inativos' },
-        { nome: "Piu", pontos: 0, status: 'inativos' },
-        { nome: "Dú", pontos: 0, status: 'inativos' },
-        { nome: "Fó", pontos: 0, status: 'inativos' },
-        { nome: "Martim", pontos: 0, status: 'inativos' },
-        { nome: "Zey", pontos: 0, status: 'inativos' }
-    ];
+  // 🔧 Suas credenciais do Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyA8zj2p59Q4u9QQNVbBwh2mvgO16mMr-og",
+    authDomain: "ranking-nunes.firebaseapp.com",
+    databaseURL: "https://ranking-nunes-default-rtdb.firebaseio.com",
+    projectId: "ranking-nunes",
+    storageBucket: "ranking-nunes.firebasestorage.app",
+    messagingSenderId: "28397645334",
+    appId: "1:28397645334:web:ce62f1de12efc987a90f37",
+    measurementId: "G-EKGPPTT8Z5"
+  };
 
-    let participantes = JSON.parse(localStorage.getItem('nunes_v3')) || listaInicial;
-    let filtro = 'ativos';
+  // Inicializar Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
 
-    function adicionar() {
-        const input = document.getElementById('novoNome');
-        if (!input.value) return;
-        participantes.push({ nome: input.value, pontos: 0, status: 'ativos' });
-        input.value = '';
-        salvar();
-    }
+  let participantes = [];
+  let filtro = 'ativos';
 
-    function editarNome(index) {
-        const novoNome = prompt("Editar nome:", participantes[index].nome);
-        if (novoNome) {
-            participantes[index].nome = novoNome;
-            salvar();
-        }
-    }
-
-    function excluir(index) {
-        if (confirm(`Excluir ${participantes[index].nome} da lista?`)) {
-            participantes.splice(index, 1);
-            salvar();
-        }
-    }
-
-    function alterarPontos(index, valor) {
-        participantes[index].pontos += valor;
-        if (participantes[index].pontos < 0) participantes[index].pontos = 0;
-        if (participantes[index].pontos > 0) participantes[index].status = 'ativos';
-        salvar();
-    }
-
-    function mudarStatus(index) {
-        participantes[index].status = participantes[index].status === 'ativos' ? 'inativos' : 'ativos';
-        salvar();
-    }
-
-    function salvar() {
-        localStorage.setItem('nunes_v3', JSON.stringify(participantes));
-        renderizar();
-    }
-
-    function filtrar(f) {
-        filtro = f;
-        document.getElementById('tab-ativos').classList.toggle('active', f === 'ativos');
-        document.getElementById('tab-inativos').classList.toggle('active', f === 'inativos');
-        renderizar();
-    }
-
-    function renderizar() {
-        const listaDiv = document.getElementById('lista');
-        const podioDiv = document.getElementById('podio-container');
-        listaDiv.innerHTML = '';
-        
-        const ordenados = [...participantes].sort((a, b) => b.pontos - a.pontos);
-
-        // Pódio
-        podioDiv.innerHTML = `
-            <div class="podium-place second">🥈 2º<br>${ordenados[1]?.nome || '-'}</div>
-            <div class="podium-place first">🥇 1º<br>${ordenados[0]?.nome || '-'}</div>
-            <div class="podium-place third">🥉 3º<br>${ordenados[2]?.nome || '-'}</div>
-        `;
-
-        // Lista
-        participantes.forEach((p, index) => {
-            if (p.status === filtro) {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="info" onclick="editarNome(${index})">
-                        <span class="name">${p.nome}</span>
-                    </div>
-                    <div class="controls">
-                        <button class="btn-round" onclick="alterarPontos(${index}, -1)">-</button>
-                        <span class="score">${p.pontos}</span>
-                        <button class="btn-round" style="background:#e8f5e9; color:#2e7d32" onclick="alterarPontos(${index}, 1)">+</button>
-                        <button onclick="mudarStatus(${index})" style="background:none; border:none; cursor:pointer; font-size:14px">⇄</button>
-                        <button class="btn-del" onclick="excluir(${index})">×</button>
-                    </div>
-                `;
-                listaDiv.appendChild(card);
-            }
-        });
-    }
-
-    function compartilhar() {
-        let txt = "*RANKING: SÓ NÃO PODE PARAR* 🏆\n\n";
-        [...participantes].sort((a, b) => b.pontos - a.pontos).forEach((p, i) => {
-            if(p.pontos > 0) txt += `${i+1}º ${p.nome}: ${p.pontos} ex.\n`;
-        });
-        window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(txt));
-    }
-
-    function resetar() {
-        if(confirm("Deseja zerar a pontuação de TODOS?")) { 
-            participantes.forEach(p => p.pontos = 0); 
-            salvar(); 
-        }
-    }
-
+  // Carregar dados em tempo real
+  db.ref("participantes").on("value", snapshot => {
+    participantes = snapshot.val() || [];
     renderizar();
-</script>
-</body>
-</html>
+  });
+
+  function salvar() {
+    db.ref("participantes").set(participantes);
+  }
+
+  function adicionar() {
+    const input = document.getElementById('novoNome');
+    if (!input.value) return;
+    participantes.push({ nome: input.value, pontos: 0, status: 'ativos' });
+    input.value = '';
+    salvar();
+  }
+
+  function editarNome(index) {
+    const novoNome = prompt("Editar nome:", participantes[index].nome);
+    if (novoNome) {
+      participantes[index].nome = novoNome;
+      salvar();
+    }
+  }
+
+  function excluir(index) {
+    if (confirm(`Excluir ${participantes[index].nome}?`)) {
+      participantes.splice(index, 1);
+      salvar();
+    }
+  }
+
+  function alterarPontos(index, valor) {
+    participantes[index].pontos += valor;
+    if (participantes[index].pontos < 0) participantes[index].pontos = 0;
+    if (participantes[index].pontos > 0) participantes[index].status = 'ativos';
+    salvar();
+  }
+
+  function mudarStatus(index) {
+    participantes[index].status = participantes[index].status === 'ativos' ? 'inativos' : 'ativos';
+    salvar();
+  }
+
+  function filtrar(f) {
+    filtro = f;
+    document.getElementById('tab-ativos').classList.toggle('active', f === 'ativos');
+    document.getElementById('tab-inativos').classList.toggle('active', f === 'inativos');
+    renderizar();
+  }
+
+  function renderizar() {
+    const listaDiv = document.getElementById('lista');
+    const podioDiv = document.getElementById('podio-container');
+    listaDiv.innerHTML = '';
+
+    const ordenados = [...participantes].sort((a, b) => b.pontos - a.pontos);
+
+    podioDiv.innerHTML = `
+      <div class="podium-place second">🥈 2º<br>${ordenados[1]?.nome || '-'}</div>
+      <div class="podium-place first">🥇 1º<br>${ordenados[0]?.nome || '-'}</div>
+      <div class="podium-place third">🥉 3º<br>${ordenados[2]?.nome || '-'}</div>
+    `;
+
+    participantes.forEach((p, index) => {
+      if (p.status === filtro) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="info" onclick="editarNome(${index})">
+            <span class="name">${p.nome}</span>
+          </div>
+          <div class="controls">
+            <button class="btn-round" onclick="alterarPontos(${index}, -1)">-</button>
+            <span class="score">${p.pontos}</span>
+            <button class="btn-round" style="background:#e8f5e9; color:#2e7d32" onclick="alterarPontos(${index}, 1)">+</button>
+            <button onclick="mudarStatus(${index})" style="background:none; border:none; cursor:pointer; font-size:14px">⇄</button>
+            <button class="btn-del" onclick="excluir(${index})">×</button>
+          </div>
+        `;
+        listaDiv.appendChild(card);
+      }
+    });
+  }
+
+  function compartilhar() {
+    let txt = "*RANKING: SÓ NÃO PODE PARAR* 🏆\n\n";
+    [...participantes].sort((a, b) => b.pontos - a.pontos).forEach
