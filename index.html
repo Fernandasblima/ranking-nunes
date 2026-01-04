@@ -133,8 +133,51 @@
     
     const ordenados = [...participantes].sort((a, b) => b.pontos - a.pontos);
 
-    // Pódio
+      // Pódio
     podioDiv.innerHTML = `
         <div class="podium-place second">🥈 2º<br>${ordenados[1]?.nome || '-'}</div>
         <div class="podium-place first">🥇 1º<br>${ordenados[0]?.nome || '-'}</div>
-        <div class="podium-place third">🥉 3º<br>${ordenados[2]?.nome || '-'}</div
+        <div class="podium-place third">🥉 3º<br>${ordenados[2]?.nome || '-'}</div>
+    `;
+
+    // Lista
+    participantes.forEach((p, index) => {
+      if (p.status === filtro) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="info" onclick="editarNome(${index})">
+            <span class="name">${p.nome}</span>
+          </div>
+          <div class="controls">
+            <button class="btn-round" onclick="alterarPontos(${index}, -1)">-</button>
+            <span class="score">${p.pontos}</span>
+            <button class="btn-round" style="background:#e8f5e9; color:#2e7d32" onclick="alterarPontos(${index}, 1)">+</button>
+            <button onclick="mudarStatus(${index})" style="background:none; border:none; cursor:pointer; font-size:14px">⇄</button>
+            <button class="btn-del" onclick="excluir(${index})">×</button>
+          </div>
+        `;
+        listaDiv.appendChild(card);
+      }
+    });
+  }
+
+  function compartilhar() {
+    let txt = "*RANKING: SÓ NÃO PODE PARAR* 🏆\n\n";
+    [...participantes].sort((a, b) => b.pontos - a.pontos).forEach((p, i) => {
+      if(p.pontos > 0) txt += `${i+1}º ${p.nome}: ${p.pontos} ex.\n`;
+    });
+    window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(txt));
+  }
+
+  function resetar() {
+    if(confirm("Deseja zerar a pontuação de TODOS?")) { 
+      participantes.forEach(p => p.pontos = 0); 
+      salvar(); 
+      renderizar(); 
+    }
+  }
+</script>
+</body>
+</html>
+
